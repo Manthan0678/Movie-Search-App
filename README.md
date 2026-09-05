@@ -1,16 +1,30 @@
-# React + Vite
+# 🎬 Movie Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive Single-Page Application (SPA) built with React that allows users to search for movies, view details dynamically, and navigate directly to official IMDb pages. Built as part of the Android Club Technical Department recruitment task.
 
-Currently, two official plugins are available:
+**Live Demo:** [Insert your Vercel link here]  
+**Demo Video:** [Insert link to your screen recording here]  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
+* **Real-Time Data:** Fetches movie data dynamically using the OMDb API.
+* **Error Handling:** Gracefully handles invalid search queries (e.g., "Movie not found!").
+* **Interactive UI:** Clickable movie cards that redirect users directly to the respective IMDb title page.
+* **Responsive Design:** Utilizes CSS Flexbox for a seamless layout across desktop and mobile browsers.
+* **Secure Configuration:** Protects API keys using environment variables.
 
-## React Compiler
+## 📸 Screenshots
+[Drag and drop a screenshot of your working app here]
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tech Stack
+* **Frontend:** React, JavaScript (ES6+), HTML, CSS
+* **Tooling:** Vite
+* **API:** OMDb API
+* **Deployment:** Vercel
 
-## Expanding the ESLint configuration
+## ⚙️ Local Setup Instructions
+To run this project locally on your machine, follow these steps:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/MANTHAN0678/movie-search-app.git](https://github.com/MANTHAN0678/movie-search-app.git)
+   cd movie-search-app
