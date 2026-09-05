@@ -1,52 +1,78 @@
 import { useState } from 'react';
+import MovieCard from './MovieCard';
 
-// Your actual API key from the screenshot
-const API_URL = "https://www.omdbapi.com/?apikey=yourapikey";
+const API_URL = "https://www.omdbapi.com/?apikey=your_api_key"; // Replace with your actual OMDB API key
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  
-  // 1. New state to hold the array of movie results
   const [movies, setMovies] = useState([]); 
 
-  // 2. The async function to fetch data
   const searchMovies = async (title) => {
-    // fetch() makes the network request
+    // Only search if the user actually typed something
+    if (!title) return; 
+
     const response = await fetch(`${API_URL}&s=${title}`);
-    
-    // Convert the raw response into JSON
     const data = await response.json();
 
-    // 3. OMDb returns the movies in an array called "Search"
     if (data.Search) {
       setMovies(data.Search);
     }
   };
 
+  // Boolean variable to check if we have results
+  const hasSearched = movies.length > 0;
+
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>Movie Search App</h1>
+    <div style={{ 
+      // This is where the magic happens:
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: hasSearched ? 'flex-start' : 'center', 
+      justifyContent: hasSearched ? 'flex-start' : 'center', 
+      minHeight: '100vh', 
+      padding: '40px', 
+      fontFamily: 'sans-serif',
+      boxSizing: 'border-box'
+    }}>
       
-      <div>
-        <input 
-          type="text" 
-          placeholder="Search for movies..." 
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={() => searchMovies(searchTerm)}>
-          Search
-        </button>
+      {/* Container for the Header and Search Bar */}
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: hasSearched ? 'flex-start' : 'center',
+        width: '100%',
+        marginBottom: '30px'
+      }}>
+        <h1>Movie Finder</h1>
+        
+        <div style={{ display: 'flex', marginTop: '10px' }}>
+          <input 
+            type="text" 
+            placeholder="Search for a movie..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            // Allows pressing "Enter" to search
+            onKeyDown={(e) => e.key === 'Enter' && searchMovies(searchTerm)}
+            style={{ padding: '10px', fontSize: '18px', width: '300px', borderRadius: '4px', border: '1px solid #ccc' }}
+          />
+          <button 
+            onClick={() => searchMovies(searchTerm)} 
+            style={{ padding: '10px 20px', fontSize: '18px', marginLeft: '10px', cursor: 'pointer', borderRadius: '4px', border: 'none', backgroundColor: '#007BFF', color: 'white' }}
+          >
+            Search
+          </button>
+        </div>
       </div>
 
-      {/* 4. Map over the movies array to display the titles */}
-      <div style={{ marginTop: '20px' }}>
-        {movies.map((movie) => (
-          <div key={movie.imdbID} style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>
-            <strong>{movie.Title}</strong> ({movie.Year})
-          </div>
-        ))}
-      </div>
+      {/* The Movie Grid - Only renders if hasSearched is true */}
+      {hasSearched && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+          {movies.map((movie) => (
+            <MovieCard key={movie.imdbID} movie={movie} />
+          ))}
+        </div>
+      )}
+      
     </div>
   );
 }
