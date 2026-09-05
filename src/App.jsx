@@ -30,31 +30,44 @@ function App() {
     <div style={{ 
       display: 'flex', 
       flexDirection: 'column', 
-      alignItems: hasSearched ? 'flex-start' : 'center', 
+      alignItems: 'center', 
       justifyContent: hasSearched ? 'flex-start' : 'center', 
       minHeight: '100vh', 
-      padding: '20px', // Reduced padding for better mobile view
-      fontFamily: 'sans-serif',
+      padding: '40px 20px', 
+      fontFamily: 'system-ui, -apple-system, sans-serif',
       boxSizing: 'border-box',
-      width: '100%'
+      width: '100%',
+      backgroundColor: '#f4f6f8', /* Soft background to make elements pop */
+      color: '#333'
     }}>
       
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        alignItems: hasSearched ? 'flex-start' : 'center',
+        alignItems: 'center',
         width: '100%',
-        marginBottom: '30px'
+        marginBottom: '40px'
       }}>
-        <h1 style={{ textAlign: 'center' }}>Movie Finder</h1>
+        <h1 style={{ 
+          textAlign: 'center', 
+          fontSize: '2.5rem', 
+          fontWeight: '800', 
+          marginBottom: '24px',
+          color: '#1a1a1a'
+        }}>
+          Movie Finder
+        </h1>
         
-        {/* Responsive Search Container */}
+        {/* Modern, elevated search bar */}
         <div style={{ 
           display: 'flex', 
           width: '100%', 
-          maxWidth: '500px', // Prevents it from being too long on desktop
-          gap: '10px', // Adds space between input and button safely
-          marginTop: '10px' 
+          maxWidth: '500px', 
+          gap: '12px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+          borderRadius: '8px',
+          backgroundColor: '#ffffff',
+          padding: '8px'
         }}>
           <input 
             type="text" 
@@ -63,25 +76,29 @@ function App() {
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && searchMovies(searchTerm)}
             style={{ 
-              flex: 1, // Tells the input to take up all remaining space securely
-              padding: '12px', 
+              flex: 1, 
+              padding: '12px 16px', 
               fontSize: '16px', 
-              borderRadius: '4px', 
-              border: '1px solid #ccc',
-              minWidth: 0 // Prevents the input from overflowing its container
+              borderRadius: '6px', 
+              border: 'none', 
+              outline: 'none', 
+              backgroundColor: 'transparent',
+              minWidth: 0
             }}
           />
           <button 
             onClick={() => searchMovies(searchTerm)} 
             style={{ 
-              padding: '12px 20px', 
+              padding: '12px 24px', 
               fontSize: '16px', 
+              fontWeight: '600',
               cursor: 'pointer', 
-              borderRadius: '4px', 
+              borderRadius: '6px', 
               border: 'none', 
-              backgroundColor: '#007BFF', 
+              backgroundColor: '#0066cc', 
               color: 'white',
-              whiteSpace: 'nowrap' // Prevents the word "Search" from breaking onto two lines
+              whiteSpace: 'nowrap',
+              boxShadow: '0 2px 4px rgba(0,102,204,0.3)'
             }}
           >
             Search
@@ -89,19 +106,28 @@ function App() {
         </div>
       </div>
 
+      {/* Styled error message badge */}
       {error && (
-        <div style={{ color: 'red', fontSize: '1.2rem', marginTop: '20px', textAlign: 'center' }}>
+        <div style={{ 
+          color: '#d32f2f', 
+          backgroundColor: '#ffebee', 
+          padding: '12px 24px', 
+          borderRadius: '8px',
+          fontSize: '1.1rem', 
+          fontWeight: '500',
+          textAlign: 'center' 
+        }}>
           {error}
         </div>
       )}
 
-      {/* The Movie Grid - added justifyContent center for better mobile wrapping */}
       {!error && hasSearched && (
         <div style={{ 
           display: 'flex', 
           flexWrap: 'wrap', 
-          gap: '20px', 
+          gap: '24px', 
           width: '100%', 
+          maxWidth: '1200px', // Keeps grids from spreading infinitely on wide monitors
           justifyContent: 'center' 
         }}>
           {movies.map((movie) => (
