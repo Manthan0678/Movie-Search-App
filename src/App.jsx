@@ -30,8 +30,8 @@ function App() {
     <div style={{ 
       display: 'flex', 
       flexDirection: 'column', 
-      alignItems: hasSearched ? 'flex-start' : 'center', 
-      justifyContent: hasSearched ? 'flex-start' : 'center', 
+      alignItems: 'center', /* CHANGED: Always stays centered horizontally */
+      justifyContent: hasSearched ? 'flex-start' : 'center', /* Moves up vertically after search to make room for movies */
       minHeight: '100vh', 
       padding: '20px', 
       fontFamily: 'sans-serif',
@@ -44,18 +44,17 @@ function App() {
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        alignItems: hasSearched ? 'flex-start' : 'center',
+        alignItems: 'center', /* CHANGED: Always keeps title and input centered */
         width: '100%',
         marginBottom: '30px'
       }}>
-        <h1 style={{ textAlign: 'center' }}>Movie Finder</h1>
+        <h1 style={{ textAlign: 'center', margin: '0 0 20px 0' }}>Movie Finder</h1>
         
         <div style={{ 
           display: 'flex', 
           width: '100%', 
           maxWidth: '500px', 
-          gap: '10px', 
-          marginTop: '10px' 
+          gap: '10px'
         }}>
           <input 
             type="text" 
@@ -68,7 +67,7 @@ function App() {
               padding: '12px', 
               fontSize: '16px', 
               borderRadius: '4px', 
-              border: '2px solid #555', /* Slightly stronger border so it doesn't look faint */
+              border: '2px solid #555', 
               backgroundColor: 'transparent',
               color: 'inherit',
               minWidth: 0 
