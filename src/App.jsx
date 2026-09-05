@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import MovieCard from './MovieCard';
 
-const API_URL = "https://www.omdbapi.com/?apikey=your_api_key"; // Replace with your actual OMDB API key
+const API_URL = "https://www.omdbapi.com/?apikey=a553d520"; // Replace with your actual OMDB API key
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
