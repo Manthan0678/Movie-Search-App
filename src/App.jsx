@@ -1,30 +1,38 @@
 import { useState } from 'react';
 import MovieCard from './MovieCard';
 
-const API_URL = "https://www.omdbapi.com/?apikey=a553d520"; // Replace with your actual OMDB API key
+const API_URL = "https://www.omdbapi.com/?apikey=a553d520";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]); 
+  
+  // 1. New state to hold error messages
+  const [error, setError] = useState(null); 
 
   const searchMovies = async (title) => {
-    // Only search if the user actually typed something
     if (!title) return; 
+
+    // Reset previous results and errors before starting a new search
+    setMovies([]);
+    setError(null);
 
     const response = await fetch(`${API_URL}&s=${title}`);
     const data = await response.json();
 
-    if (data.Search) {
+    // 2. OMDb returns Response: "True" if it found movies, and "False" if it failed
+    if (data.Response === "True") {
       setMovies(data.Search);
+    } else {
+      setError(data.Error); // e.g., "Movie not found!"
     }
   };
 
-  // Boolean variable to check if we have results
-  const hasSearched = movies.length > 0;
+  // 3. Shift the layout to the top if we have movies OR an error
+  const hasSearched = movies.length > 0 || error !== null;
 
   return (
     <div style={{ 
-      // This is where the magic happens:
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: hasSearched ? 'flex-start' : 'center', 
@@ -35,7 +43,6 @@ function App() {
       boxSizing: 'border-box'
     }}>
       
-      {/* Container for the Header and Search Bar */}
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
@@ -51,7 +58,6 @@ function App() {
             placeholder="Search for a movie..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            // Allows pressing "Enter" to search
             onKeyDown={(e) => e.key === 'Enter' && searchMovies(searchTerm)}
             style={{ padding: '10px', fontSize: '18px', width: '300px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
@@ -64,8 +70,15 @@ function App() {
         </div>
       </div>
 
-      {/* The Movie Grid - Only renders if hasSearched is true */}
-      {hasSearched && (
+      {/* 4. Display the error message in red if it exists */}
+      {error && (
+        <div style={{ color: 'red', fontSize: '1.2rem', marginTop: '20px' }}>
+          {error}
+        </div>
+      )}
+
+      {/* The Movie Grid */}
+      {!error && hasSearched && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
           {movies.map((movie) => (
             <MovieCard key={movie.imdbID} movie={movie} />
