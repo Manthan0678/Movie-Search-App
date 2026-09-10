@@ -3,7 +3,7 @@
 A responsive Single-Page Application (SPA) built with React that allows users to search for movies, view details dynamically, and navigate directly to official IMDb pages. Built as part of the Android Club Technical Department recruitment task.
 
 **Live Demo:** https://movie-search-app-sooty-three.vercel.app/
-**Demo Video:** [Insert link to your screen recording here]  
+**Demo Video:** [Insert link to your screen recording here]. 
 
 ## ✨ Features
 * **Real-Time Data:** Fetches movie data dynamically using the OMDb API.
