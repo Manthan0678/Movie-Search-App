@@ -30,8 +30,8 @@ function App() {
     <div style={{ 
       display: 'flex', 
       flexDirection: 'column', 
-      alignItems: 'center', /* CHANGED: Always stays centered horizontally */
-      justifyContent: hasSearched ? 'flex-start' : 'center', /* Moves up vertically after search to make room for movies */
+      alignItems: 'center', 
+      justifyContent: hasSearched ? 'flex-start' : 'center', 
       minHeight: '100vh', 
       padding: '20px', 
       fontFamily: 'sans-serif',
@@ -44,7 +44,7 @@ function App() {
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        alignItems: 'center', /* CHANGED: Always keeps title and input centered */
+        alignItems: 'center', 
         width: '100%',
         marginBottom: '30px'
       }}>

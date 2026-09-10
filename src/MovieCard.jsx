@@ -1,9 +1,7 @@
 const MovieCard = ({ movie }) => {
-  // 1. Construct the exact IMDb URL using the unique ID
   const imdbUrl = `https://www.imdb.com/title/${movie.imdbID}/`;
 
   return (
-    // 2. Wrap the card in an anchor tag to make it a clickable link
     <a 
       href={imdbUrl} 
       target="_blank" 
@@ -16,7 +14,7 @@ const MovieCard = ({ movie }) => {
         padding: '10px', 
         width: '200px',
         backgroundColor: '#f9f9f9',
-        cursor: 'pointer', // 3. Changes the mouse to a hand icon on hover
+        cursor: 'pointer', 
         height: '100%',
         boxSizing: 'border-box'
       }}>
